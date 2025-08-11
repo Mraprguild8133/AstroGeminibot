@@ -8,7 +8,6 @@ from datetime import datetime
 from telegram import Update
 from telegram.ext import ContextTypes
 
-from services.openai_service import OpenAIService
 from services.gemini_service import GeminiService
 from services.together_service import TogetherService
 
@@ -29,12 +28,6 @@ class MessageHandlers:
     
     def _initialize_services(self):
         """Initialize available AI services"""
-        if self.config.openai_api_key:
-            try:
-                self.services['openai'] = OpenAIService(self.config.openai_api_key)
-                logger.info("OpenAI service initialized")
-            except Exception as e:
-                logger.error(f"Failed to initialize OpenAI service: {e}")
         
         if self.config.gemini_api_key:
             try:
@@ -57,8 +50,6 @@ class MessageHandlers:
         """Get the appropriate service for a given model"""
         model_lower = model.lower()
         
-        if 'gpt' in model_lower or 'openai' in model_lower:
-            return self.services.get('openai')
         elif 'gemini' in model_lower:
             return self.services.get('gemini')  
         elif 'llama' in model_lower or 'mistral' in model_lower:
@@ -68,9 +59,6 @@ class MessageHandlers:
     
     def _auto_select_service(self):
         """Automatically select best available service"""
-        # Prefer OpenAI GPT-4o-mini for general use (fast and cost-effective)
-        if 'openai' in self.services:
-            return self.services['openai'], "gpt-4o-mini"
         
         # Fall back to Gemini Flash (fast)
         if 'gemini' in self.services:
