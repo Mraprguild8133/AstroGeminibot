@@ -19,7 +19,6 @@ class Config:
             raise ValueError("TELEGRAM_BOT_TOKEN is required")
         
         # AI Provider API Keys
-        self.openai_api_key = os.getenv("OPENAI_API_KEY")
         self.gemini_api_key = os.getenv("GEMINI_API_KEY")
         self.together_api_key = os.getenv("TOGETHER_API_KEY")
         
