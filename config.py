@@ -46,8 +46,6 @@ class Config:
     def get_available_services(self) -> List[str]:
         """Get list of available AI services based on API keys"""
         services = []
-        if self.openai_api_key:
-            services.append("OpenAI")
         if self.gemini_api_key:
             services.append("Gemini")
         if self.together_api_key:
