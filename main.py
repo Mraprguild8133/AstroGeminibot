@@ -26,7 +26,7 @@ def main():
         return
     
     # Check if at least one AI provider is configured
-    ai_providers = ['OPENAI_API_KEY', 'GEMINI_API_KEY', 'TOGETHER_API_KEY']
+    ai_providers = ['GEMINI_API_KEY', 'TOGETHER_API_KEY']
     available_providers = [var for var in ai_providers if os.getenv(var)]
     
     if not available_providers:
