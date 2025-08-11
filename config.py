@@ -56,20 +56,6 @@ class Config:
         """Get information about available models"""
         models = {}
         
-        if self.openai_api_key:
-            models.update({
-                "gpt-4o": {
-                    "provider": "OpenAI",
-                    "description": "Most capable GPT model",
-                    "emoji": "🚀"
-                },
-                "gpt-4o-mini": {
-                    "provider": "OpenAI", 
-                    "description": "Fast and cost-effective",
-                    "emoji": "⚡"
-                }
-            })
-        
         if self.gemini_api_key:
             models.update({
                 "gemini-2.5-flash": {
